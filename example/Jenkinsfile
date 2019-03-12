@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+  stages {
+    stage('Maven Build') {
+      steps {
+        sh 'mvn -B -DskipTests clean package'
+      }
+    }
+    stage('Docker Push') {
+      steps {
+        sh 'docker build -t 1.1.1.1:5000/eureka:latest .'
+        sh 'docker push 1.1.1.1:5000/eureka:latest'
+      }
+    }
+    stage('Rancher Deploy') {
+      steps {
+        sh 'rancher --debug --url http://YOUR_RANCHER_HOST:PORT/v1 --access-key YOUR_ACCESS_KEY --secret-key YOUR_SECRET_KEY up --force-upgrade --stack YOUR_RANCHER_STACK_NAME -d'
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+version: '2'
+services:
+  eureka:
+    image: 1.1.1.1:5000/eureka:latest
+    labels:
+      io.rancher.container.pull_image: always
+    ports:
+      - "8761:8761"
