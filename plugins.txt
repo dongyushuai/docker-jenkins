@@ -1,0 +1,8 @@
+blueocean:latest
+ws-cleanup:latest
+timestamper:latest
+github-oauth:latest
+amazon-ecr:latest
+pipeline-utility-steps:latest
+slack:latest
+ssh-agent:latest

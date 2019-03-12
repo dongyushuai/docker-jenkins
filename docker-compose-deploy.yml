@@ -1,0 +1,20 @@
+version: '2'
+volumes:
+  jenkins_home:
+    external: true
+    driver: rancher-ebs
+    driver_opts:
+      size: 20
+      volumeType: gp2
+      ec2_az: eu-west-2b
+      tags: "Key=RancherAccess,Value=true"
+services:
+  jenkins:
+    image: fixiu/jenkins-pipeline:latest
+    volumes:
+    - jenkins_home:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      jenkins: 'true'
+      io.rancher.scheduler.affinity:host_label: jenkins=true
+      io.rancher.container.pull_image: always
