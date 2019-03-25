@@ -22,5 +22,7 @@ $ docker build -t fixiu/jenkins-pipeline .
 ## Run (will pull from dockerhub)
 
 ```
-$ docker run -it -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock fixiu/jenkins-pipeline
+$ mkdir /home/jenkins_home
+$ chown -R 1000:1000 /home/jenkins_home
+$ docker run -it -d -p 8080:8080 --privileged -v /home/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock fixiu/jenkins-pipeline
 ```
