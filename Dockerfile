@@ -10,8 +10,16 @@ RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 # Installing packages, need to be root to do so
 USER root
 
+RUN apk add --no-cache python3 && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install --upgrade pip setuptools && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
+    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
+    rm -r /root/.cache
+
 # We need docker tools, make and ssl support for wget
-ENV PACKAGES "gcc ca-certificates docker make openssl python py-pip"
+ENV PACKAGES "gcc ca-certificates docker make openssl"
 RUN apk add --update $PACKAGES \
     && pip install docker-compose \
     && apk --purge -v del py-pip \
