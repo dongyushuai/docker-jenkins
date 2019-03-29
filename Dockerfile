@@ -10,7 +10,7 @@ RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 # Installing packages, need to be root to do so
 USER root
 
-RUN apk add --no-cache python3 && \
+RUN apk add --no-cache python3-dev && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --upgrade pip setuptools && \
