@@ -62,15 +62,6 @@ RUN mkdir /var/npm
 # nodejs
 RUN mkdir /nodejs && curl http://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-linux-x64.tar.gz | tar xvzf - -C /nodejs --strip-components=1
 ENV PATH=$PATH:/nodejs/bin
-# needed global npm deps
-RUN npm install -g node-gyp  && \
-    npm install -g gulp && \
-    npm install -g nightwatch && \
-    npm install -g nightwatch-html-reporter && \
-    npm install -g grunt-cli && \
-    npm install -g bower && \
-    npm install --unsafe-perm -g azure-cli && \
-    azure telemetry --disable
 
 VOLUME /var/jenkins_home
 VOLUME ${MAVEN_CONFIG}
