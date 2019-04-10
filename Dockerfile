@@ -13,7 +13,7 @@ USER root
 # We need docker tools, make and ssl support for wget
 ENV PACKAGES "gcc ca-certificates docker make openssl"
 RUN apk add --update $PACKAGES \
-    && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+#    && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && rm -rf /var/cache/apk/*
 
 # Download and install Rancher CLI
