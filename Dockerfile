@@ -11,7 +11,7 @@ RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 USER root
 
 # We need docker tools, make and ssl support for wget
-ENV PACKAGES "gcc ca-certificates docker make openssl"
+ENV PACKAGES "gcc ca-certificates docker make openssl nodejs nodejs-npm"
 RUN apk add --update $PACKAGES \
 #    && cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && rm -rf /var/cache/apk/*
@@ -51,17 +51,6 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
-
-# Install NodeJS
-ARG NODEJS_VERSION=10.15.3
-
-# create dir for npm cache (run npm config set cache /var/npm/cache)
-#RUN mkdir /var/npm && chown jenkins:docker /var/npm
-RUN mkdir /var/npm
-
-# nodejs
-RUN mkdir /nodejs && curl http://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-linux-x64.tar.gz | tar xvzf - -C /nodejs --strip-components=1
-ENV PATH=$PATH:/nodejs/bin
 
 VOLUME /var/jenkins_home
 VOLUME ${MAVEN_CONFIG}
