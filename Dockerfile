@@ -60,7 +60,7 @@ RUN mkdir -p /tmp/sonar-scanner ${SONAR_RUNNER_HOME} \
 	&& curl -fsSL -o /tmp/sonar-scanner/sonar-scanner-cli-${SONAR_RUNNER_VERSION}-linux.zip https://repo1.maven.org/maven2/org/sonarsource/scanner/cli/sonar-scanner-cli/${SONAR_RUNNER_VERSION}/sonar-scanner-cli-${SONAR_RUNNER_VERSION}-linux.zip \
 	&& unzip -d /tmp/sonar-scanner/sonar-scanner-cli-${SONAR_RUNNER_VERSION}-linux /tmp/sonar-scanner/sonar-scanner-cli-${SONAR_RUNNER_VERSION}-linux.zip \
 	&& mv /tmp/sonar-scanner/sonar-scanner-cli-${SONAR_RUNNER_VERSION}-linux/* ${SONAR_RUNNER_HOME} \
-	&& rm -f /tmp/sonar-scanner
+	&& rm -r /tmp/sonar-scanner
 
 VOLUME /var/jenkins_home
 VOLUME ${MAVEN_CONFIG}
